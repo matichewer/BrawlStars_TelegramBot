@@ -42,9 +42,7 @@ public class BotCreator extends TelegramLongPollingBot {
              
             
             if(msgText.equals("/guardar") || msgText.startsWith("/guardar")) {
-            	System.out.println("aaaaaaaaaaa");
             	if(msgText.length()<10) {
-            		System.out.println("hola");
             		respuesta = "Te has olvidado de poner tu tag de BrawlStars.";
             	}
             	else {
@@ -59,7 +57,6 @@ public class BotCreator extends TelegramLongPollingBot {
 	            	else
 	            		respuesta = "Ese tag no corresponde con ninguna cuenta de Brawl Stars.";
             	}
-            	System.out.println(respuesta);
             	enviarMensaje(chatID, respuesta);
             }
             
@@ -131,8 +128,8 @@ public class BotCreator extends TelegramLongPollingBot {
 	public String getBotToken() {		
 		String token = "";
 		try {
-			File archivoToken = new File ("tokenBotTelegram.txt");
-			FileReader fr = new FileReader (archivoToken);
+			File fileToken = new File ("./config/Token_TelegramBot.txt");
+			FileReader fr = new FileReader (fileToken);
 			BufferedReader br = new BufferedReader(fr);
 			token = br.readLine();
 			br.close();

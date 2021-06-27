@@ -16,7 +16,8 @@ import org.json.JSONObject;
 public class DataManager {
 
 
-	private String ruta = "./db.json";
+	private final String dbFolderPath = "./database/";
+	private final String dbAccountsPath = dbFolderPath + "accounts.json";
 	private JSONArray jsonArray;
 	private SimpleDateFormat formatoFecha;
 	
@@ -24,8 +25,6 @@ public class DataManager {
 	public DataManager() {
 		formatoFecha = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss 'ARG'");
 		iniciarJson();
-		
-		
 	}
 	
 	
@@ -33,20 +32,29 @@ public class DataManager {
 		try {
 			
 			String contenidoJson;
-			File file = new File(ruta);
 			
-			// si el archivo no existe, se inicializa
-			if(!file.exists()) { 
+			// Chequeo que la carpeta de la base de datos exista
+	    	File dbFolder = new File(dbFolderPath);
+			if(!dbFolder.exists()) 
+				dbFolder.mkdir();		
+			
+			// Chequeo que exista la base de datos, de lo contrario la inicializo
+			File dbAccounts  = new File(dbAccountsPath);
+	    	if(!dbAccounts.exists()) { 
 		        contenidoJson = "[ ]";
-				file.createNewFile();
-				FileWriter fw = new FileWriter(file);
+	    		dbAccounts.createNewFile();
+				FileWriter fw = new FileWriter(dbAccounts);
 		        BufferedWriter bw = new BufferedWriter(fw);
 		        bw.write(contenidoJson);
 		        bw.close();
 		        fw.close();
-			} else // si existe, se lee
-				contenidoJson = new String((Files.readAllBytes(Paths.get(ruta))));				
-		
+			} else {
+				contenidoJson = new String((Files.readAllBytes(Paths.get(dbAccountsPath))));
+		    	// Si el archivo existia pero estaba vacio
+		    	if(contenidoJson.isEmpty())
+		    		contenidoJson = "[ ]";	
+			}
+	    	
 			jsonArray = new JSONArray(contenidoJson);
 		    
 		} catch(IOException e) {
@@ -172,7 +180,7 @@ public class DataManager {
     	
         // actualizo el archivo
 		try {
-			FileWriter file = new FileWriter(ruta);
+			FileWriter file = new FileWriter(dbAccountsPath);
 	        file.write(jsonArray.toString(3));
 	        file.close();
 		} catch (IOException e) {

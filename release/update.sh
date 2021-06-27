@@ -136,7 +136,7 @@ opcion4(){
 	echo
 
 	echo -e "${AMARILLO}Actualizando bot en Raspberry Pi...${NC}"
-	ssh pi@192.168.0.2 'cd BrawlStars_TelegramBot/ ; ./bot.sh actualizar'
+	ssh pi@192.168.0.2 'bash /home/pi/BrawlStars_TelegramBot/admin-bot.sh actualizar'
 	echo -e "${VERDE}${NEGRITA}[OK]${NC} ¡Actualizacion terminada!"
 	echo
 }
@@ -202,15 +202,15 @@ case $opcion in
     opcion4
   ;;
   8)
-	cd ${RUTA_PROYECTO_JAVA_WRAPPER}
-	limpiezaMaven
+		cd ${RUTA_PROYECTO_JAVA_WRAPPER}
+		limpiezaMaven
   ;;
   9)
 	cd ${RUTA_PROYECTO_TELEGRAM_BOT}
     limpiezaMaven
   ;;
   *)
-	echo -e "${ROJO}${NEGRITA}[ERROR]${NC} Opcion incorrecta. Saliendo...${NC}"
+		echo -e "${ROJO}${NEGRITA}[ERROR]${NC} Opcion incorrecta. Saliendo...${NC}"
     exit 1
   ;;
 esac
