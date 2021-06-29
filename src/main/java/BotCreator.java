@@ -92,7 +92,7 @@ public class BotCreator extends TelegramLongPollingBot {
 		String msg = "<b>Nombre:</b><i> " + p.getNombre() + " (#" + p.getTag() + ")</i>\n";
 		msg += "<b>Trofeos🏆:</b><i> " + p.getTrofeos() + " (max: " + p.getTrofeosMax() + ")</i>\n";
 		msg += "<b>Nivel🔋:</b><i> " + p.getNivel() + "</i>\n";
-		msg += "<b>Victorias 3vs3⚔️:</b><i> " + p.getVictorias3vs3() + "</i>\n";
+		msg += "<b>Victorias 3v3⚔️:</b><i> " + p.getVictorias3vs3() + "</i>\n";
 		msg += "<b>Victorias Solo⚔️:</b><i> " + p.getVictoriasSolo() + "</i>\n";
 		msg += "<b>Victorias Duo⚔️:</b><i> " + p.getVictoriasDuo() + "</i>\n";
 		
